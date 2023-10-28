@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            this.belongsTo(models.Room)
+            this.belongsTo(models.User)
+            this.belongsTo(models.Setting)
         }
     }
     Room_setting_user.init(

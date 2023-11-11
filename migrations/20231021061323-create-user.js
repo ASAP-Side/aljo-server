@@ -15,9 +15,6 @@ module.exports = {
       nick_name: {
         type: Sequelize.STRING
       },
-      role: {
-        type: Sequelize.STRING
-      },
       image: {
         type: Sequelize.STRING
       },

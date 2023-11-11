@@ -15,7 +15,7 @@ module.exports = {
             },
             {
                 title: '뚜뚜뚜',
-                max_person: 7,
+                max_person: 5,
                 current_person: 3,
                 is_deadline: false,
                 alarm_deadline: new Date(),

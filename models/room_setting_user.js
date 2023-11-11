@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
             room_id: DataTypes.INTEGER,
             setting_id: DataTypes.INTEGER,
             user_id: DataTypes.INTEGER,
+            user_role: DataTypes.STRING,
         },
         {
             sequelize,

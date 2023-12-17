@@ -33,6 +33,12 @@ module.exports = {
       is_public: {
         type: Sequelize.BOOLEAN
       },
+      view_count: {
+        type: Sequelize.INTEGER
+      },
+      status: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

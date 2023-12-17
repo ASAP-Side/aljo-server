@@ -7,6 +7,7 @@ require("dotenv").config();
 const morgan = require("morgan");
 const { sequelize } = require('./models'); // db.sequelize 객체
 const alarmRouter = require("./routes/alarm");
+const roomRouter = require("./routes/room");
 
 sequelize
     .sync({ force: false }) // 서버 실행시 MySQL 과 연동되도록 하는 sync 메서드
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/alarm", alarmRouter);
+app.use("/room", roomRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');

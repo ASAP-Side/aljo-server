@@ -1,7 +1,7 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Setting extends Model {
+    class clock extends Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.
@@ -9,20 +9,27 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            this.hasMany(models.Room_setting_user);
+            this.belongsTo(models.Room);
+            this.belongsTo(models.User);
+            this.belongsTo(models.Setting);
         }
     }
-    Setting.init(
+    clock.init(
         {
-            alarm_type: DataTypes.STRING,
+            is_am: DataTypes.BOOLEAN,
+            hour_min: DataTypes.STRING,
+            day_list: DataTypes.JSON,
+            music: DataTypes.STRING,
+            alarm_custom: DataTypes.STRING,
+            repeat_end_date: DataTypes.STRING,
         },
         {
             sequelize,
-            tableName: 'settings',
-            modelName: 'Setting',
+            tableName: 'clock',
+            modelName: 'Clock',
             timestamps: true,
             charset: 'utf8',
         }
     );
-    return Setting;
+    return clock;
 };

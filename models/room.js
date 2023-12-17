@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            this.hasMany(models.Room_setting_user)
+            this.hasMany(models.Room_setting_user);
         }
     }
     Room.init(
@@ -22,6 +22,8 @@ module.exports = (sequelize, DataTypes) => {
             alarm_hour: DataTypes.DATE,
             alarm_date: DataTypes.JSON,
             is_public: DataTypes.BOOLEAN,
+            view_count: DataTypes.INTEGER,
+            status: DataTypes.STRING,
         },
         {
             sequelize,

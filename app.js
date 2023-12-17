@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const cors = require("cors");
+require("dotenv").config();
 
+const morgan = require("morgan");
 const { sequelize } = require('./models'); // db.sequelize 객체
+const alarmRouter = require("./routes/alarm");
 
 sequelize
     .sync({ force: false }) // 서버 실행시 MySQL 과 연동되도록 하는 sync 메서드
@@ -14,9 +18,19 @@ sequelize
         console.log(err);
     });
 
+app.use(cors());
+app.use(morgan("dev"));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/alarm", alarmRouter);
+
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
+
+
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

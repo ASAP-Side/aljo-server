@@ -12,6 +12,21 @@ module.exports = {
       alarm_type: {
         type: Sequelize.STRING,
       },
+      is_am: {
+        type: Sequelize.BOOLEAN,
+      },
+      hour_min: {
+        type: Sequelize.STRING,
+      },
+      day_list: {
+        type: Sequelize.JSON,
+      },
+      music: {
+        type: Sequelize.STRING,
+      },
+      repeat_end_date: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -15,6 +15,11 @@ module.exports = (sequelize, DataTypes) => {
     Setting.init(
         {
             alarm_type: DataTypes.STRING,
+            is_am: DataTypes.BOOLEAN,
+            hour_min: DataTypes.STRING,
+            day_list: DataTypes.JSON,
+            music: DataTypes.STRING,
+            repeat_end_date: DataTypes.STRING,
         },
         {
             sequelize,

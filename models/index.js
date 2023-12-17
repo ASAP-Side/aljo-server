@@ -10,7 +10,6 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 db.User = require('./user')(sequelize, Sequelize);
 db.Setting = require('./setting')(sequelize, Sequelize);
 db.Room = require('./room')(sequelize, Sequelize);
-db.Clock = require('./clock')(sequelize, Sequelize);
 db.Room_setting_user = require('./room_setting_user')(sequelize, Sequelize);
 
 db.sequelize = sequelize; // 나중에 연결 객체 재사용을 위해 넣어둠, db객체에 sequelize라는 프로퍼티 추가

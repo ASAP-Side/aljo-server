@@ -12,6 +12,13 @@ db.Setting = require('./setting')(sequelize, Sequelize);
 db.Room = require('./room')(sequelize, Sequelize);
 db.Room_setting_user = require('./room_setting_user')(sequelize, Sequelize);
 
+// 여기에 모델 간의 관계를 설정하는 코드를 추가
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+
 db.sequelize = sequelize; // 나중에 연결 객체 재사용을 위해 넣어둠, db객체에 sequelize라는 프로퍼티 추가
 
 module.exports = db; // export 하기

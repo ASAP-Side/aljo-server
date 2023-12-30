@@ -9,23 +9,29 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            this.belongsTo(models.Room);
-            this.belongsTo(models.User);
-            this.belongsTo(models.Setting);
+            // this.belongsTo(models.Room);
+            // this.belongsTo(models.User);
+            // this.belongsTo(models.Setting);
         }
     }
     clock.init(
         {
-            is_am: DataTypes.BOOLEAN,
-            hour_min: DataTypes.STRING,
-            day_list: DataTypes.JSON,
-            music: DataTypes.STRING,
-            alarm_custom: DataTypes.STRING,
-            repeat_end_date: DataTypes.STRING,
+            user_id: DataTypes.INTEGER,
+            room_id: DataTypes.INTEGER,
+            // TargetDate
+            am_pm: DataTypes.INTEGER,
+            hour: DataTypes.INTEGER,
+            minute: DataTypes.INTEGER,
+            days_of_week: DataTypes.JSON,
+
+            // EndDate
+            year: DataTypes.INTEGER,
+            month: DataTypes.INTEGER,
+            date: DataTypes.INTEGER,
         },
         {
             sequelize,
-            tableName: 'clock',
+            tableName: 'clocks',
             modelName: 'Clock',
             timestamps: true,
             charset: 'utf8',

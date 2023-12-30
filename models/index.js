@@ -10,6 +10,7 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 db.User = require('./user')(sequelize, Sequelize);
 db.Setting = require('./setting')(sequelize, Sequelize);
 db.Room = require('./room')(sequelize, Sequelize);
+db.Clock = require('./clock')(sequelize, Sequelize);
 db.Room_setting_user = require('./room_setting_user')(sequelize, Sequelize);
 
 // 여기에 모델 간의 관계를 설정하는 코드를 추가

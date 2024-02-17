@@ -2,28 +2,39 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Settings", {
+    await queryInterface.createTable("Clocks", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      user_id:  {
+      user_id: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
       },
-      nickname: {
-        type: Sequelize.STRING,
+      room_id: {
+        type: Sequelize.INTEGER,
       },
-      profile_img_url: {
-        type: Sequelize.STRING,
+      am_pm: {
+        type: Sequelize.INTEGER,
       },
-      alarm_type: {
-        type: Sequelize.STRING,
+      hour: {
+        type: Sequelize.INTEGER,
       },
-      music_title: {
-        type: Sequelize.STRING,
+      minute: {
+        type: Sequelize.INTEGER,
+      },
+      days_of_week: {
+        type: Sequelize.JSON,
+      },
+      year: {
+        type: Sequelize.INTEGER,
+      },
+      month: {
+        type: Sequelize.INTEGER,
+      },
+      date: {
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -36,6 +47,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Settings");
+    await queryInterface.dropTable("Clocks");
   },
 };

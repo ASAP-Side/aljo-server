@@ -42,7 +42,7 @@ router.post("/", upload.single("profile_img"), async (req, res) => {
   const profileImgObj = req.file;
   console.log(profileImgObj, "profileImgObj");
 
-  const { user_id, nickname, alarm_type, music_title } = req.body;
+  const { user_id, nickname, alarm_type, music_title, music_volume } = req.body;
   if (!user_id) {
     return res.status(404).json({ result: false });
   }
@@ -56,20 +56,26 @@ router.post("/", upload.single("profile_img"), async (req, res) => {
     },
   });
 
-  if (userSettingObj) {
+  if (userSettingObj?.nickname === nickname || userSettingObj) {
     console.log(
-      `[setting create fail alreay exist] user_id: ${userSettingObj.user_id}`
+      `[setting create fail] user: ${userSettingObj?.user_id}, nickname: ${userSettingObj?.nickname}`
     );
     return res.status(409).json({ result: false });
   }
 
-  await Setting.create({
-    user_id: Number(user_id),
-    nickname,
-    profile_img_url: imageUrl,
-    alarm_type,
-    music_title,
-  });
+  try {
+    await Setting.create({
+      user_id: Number(user_id),
+      nickname,
+      profile_img_url: imageUrl,
+      alarm_type,
+      music_title,
+      music_volume: Number(music_volume),
+    });
+  } catch (e) {
+    console.error(e);
+    return res.status(409).json({ result: false });
+  }
 
   res.json({
     user_id: Number(user_id),
@@ -77,13 +83,14 @@ router.post("/", upload.single("profile_img"), async (req, res) => {
     profile_img: imageUrl,
     alarm_type,
     music_title,
+    music_volume: Number(music_volume),
   });
 });
 
 // 기본설정 업데이트(이미 인입된 사용자가 호출)
 router.patch("/", upload.single("profile_img"), async (req, res) => {
   const profileImgObj = req.file;
-  const { user_id, nickname, alarm_type, music_title } = req.body;
+  const { user_id, nickname, alarm_type, music_title, music_volume } = req.body;
 
   if (!user_id) {
     return res.status(404).json({ result: false });
@@ -102,17 +109,33 @@ router.patch("/", upload.single("profile_img"), async (req, res) => {
     return res.status(404).json({ result: false });
   }
 
-  if (profileImgObj) {
-    const imageUrl = await handleUploadS3(user_id, profileImgObj);
-    await Setting.update(
-      { nickname, alarm_type, music_title, profile_img_url: imageUrl },
-      { where: { user_id: Number(user_id) } }
-    );
-  } else {
-    await Setting.update(
-      { nickname, alarm_type, music_title },
-      { where: { user_id: Number(user_id) } }
-    );
+  try {
+    if (profileImgObj) {
+      const imageUrl = await handleUploadS3(user_id, profileImgObj);
+      await Setting.update(
+        {
+          nickname,
+          alarm_type,
+          music_title,
+          music_volume: Number(music_volume),
+          profile_img_url: imageUrl,
+        },
+        { where: { user_id: Number(user_id) } }
+      );
+    } else {
+      await Setting.update(
+        {
+          nickname,
+          alarm_type,
+          music_title,
+          music_volume: Number(music_volume),
+        },
+        { where: { user_id: Number(user_id) } }
+      );
+    }
+  } catch (e) {
+    console.error(e);
+    return res.status(409).json({ result: false });
   }
 
   res.json({ isSuccess: true });

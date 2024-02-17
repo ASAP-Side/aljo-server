@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Room_setting_users', {
+    await queryInterface.createTable('room_setting_users', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,13 +10,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       room_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        unique: true
       },
       setting_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        unique: true
       },
       user_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        unique: true
       },
       user_role: {
         type: Sequelize.STRING
@@ -32,6 +35,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Room_setting_users');
+    await queryInterface.dropTable('room_setting_users');
   }
 };

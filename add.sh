@@ -1,5 +1,5 @@
 #! /bin/sh
 
 npx sequelize-cli db:migrate
-sleep 1
+sleep 3
 npx sequelize-cli db:seed:all

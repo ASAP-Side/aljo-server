@@ -17,11 +17,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Room.init(
     {
-      title: DataTypes.STRING,
-      max_person: DataTypes.INTEGER,
-      current_person: DataTypes.INTEGER,
-      is_deadline: DataTypes.BOOLEAN,
-      alarm_deadline: DataTypes.DATE,
+      title: DataTypes.STRING, // 제목
+      max_person: DataTypes.INTEGER, // 최대 인원수
+      current_person: DataTypes.INTEGER, // 현재 인원수
+      is_deadline: DataTypes.BOOLEAN, // 마감여부
+      alarm_deadline: DataTypes.DATE, // 
       alarm_hour: DataTypes.DATE,
       alarm_date: DataTypes.JSON,
       is_public: DataTypes.BOOLEAN,

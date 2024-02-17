@@ -2,11 +2,6 @@
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class clock extends Model {
-        /**
-         * Helper method for defining associations.
-         * This method is not a part of Sequelize lifecycle.
-         * The `models/index` file will call this method automatically.
-         */
         static associate(models) {
             // define association here
             // this.belongsTo(models.Room);
@@ -16,18 +11,19 @@ module.exports = (sequelize, DataTypes) => {
     }
     clock.init(
         {
-            user_id: DataTypes.INTEGER,
-            room_id: DataTypes.INTEGER,
-            // TargetDate
-            am_pm: DataTypes.INTEGER,
-            hour: DataTypes.INTEGER,
-            minute: DataTypes.INTEGER,
-            days_of_week: DataTypes.JSON,
+            user_id: DataTypes.INTEGER, // 유저id
+            room_id: DataTypes.INTEGER, // 그룹id
 
-            // EndDate
-            year: DataTypes.INTEGER,
-            month: DataTypes.INTEGER,
-            date: DataTypes.INTEGER,
+            // TargetDate 
+            am_pm: DataTypes.INTEGER, // 0: am, 1: pm
+            hour: DataTypes.INTEGER, // 시간 (0-23)
+            minute: DataTypes.INTEGER, // 분 (0-59)
+            days_of_week: DataTypes.JSON, // 요일 목록 ['Monday', 'Tuesday']
+
+            // EndDate 
+            year: DataTypes.INTEGER, // 년도
+            month: DataTypes.INTEGER, // 월 (1-12)
+            date: DataTypes.INTEGER, // 날짜 (1-31)
         },
         {
             sequelize,

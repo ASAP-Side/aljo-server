@@ -9,22 +9,20 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      user_id:  {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+      },
+      nickname: {
+        type: Sequelize.STRING,
+      },
+      profile_img_url: {
+        type: Sequelize.STRING,
+      },
       alarm_type: {
         type: Sequelize.STRING,
       },
-      is_am: {
-        type: Sequelize.BOOLEAN,
-      },
-      hour_min: {
-        type: Sequelize.STRING,
-      },
-      day_list: {
-        type: Sequelize.JSON,
-      },
-      music: {
-        type: Sequelize.STRING,
-      },
-      repeat_end_date: {
+      music_title: {
         type: Sequelize.STRING,
       },
       createdAt: {
